@@ -8,18 +8,9 @@ namespace Framework_DaC_DAA
     {
         public List<int> Combine(List<int> left, List<int> right)
         {
-            List<int> result = new List<int>();
-            for(int i = 0; i < left.Count; i++)
-            {
-                result.Add(left[i]);
-            }
-            for(int i = 0; i < right.Count; i++)
-            {
-                result.Add(right[i]);
-            }
-            return result;
+            left.AddRange(right);
+            return left;
         }
-
         public List<List<int>> Divide(List<int> vector, int d = 2)
         {
             

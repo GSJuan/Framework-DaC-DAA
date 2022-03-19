@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Framework_DaC_DAA
 {
@@ -7,32 +8,65 @@ namespace Framework_DaC_DAA
     {
         static void Main(string[] args)
         {
+            int size = 10;
             DyV<MergeSort> mergeSort = new DyV<MergeSort>();
             DyV<QuickSort> quickSort = new DyV<QuickSort>();
+            TableDrawing table = new TableDrawing(100);
+            Stopwatch chrono = new Stopwatch();
 
-            List<int> vector = new List<int> {8, 7, 6, 1, 56, 0, 9, 2};
-            foreach (int i in vector)
-            {
-                Console.Write(i);
-                Console.Write(" ");
-            }
-            Console.Write("\n");
+            table.PrintLine();
+            table.PrintRow("Size", "MergeSort Time", "QuickSort Time");
+            table.PrintLine();
 
-            List<int> solution = mergeSort.Solve(vector, vector.Count);
-            foreach (int i in solution)
+            while (size < 200)
             {
-                Console.Write(i);
-                Console.Write(" ");
-            }
-            Console.Write("\n");
+                InstanceGenerator instanceGenerator = new InstanceGenerator(size);
+                List<int> vector = instanceGenerator.Generate();
 
-            List<int> solution2 = quickSort.Solve(vector, vector.Count);
-            foreach (int i in solution2)
-            {
-                Console.Write(i);
-                Console.Write(" ");
+            //Console.Write("Generated Instance of size {0}:  ", size);
+            //foreach (int i in vector)
+            //{
+            //    Console.Write(i);
+            //    Console.Write(" ");
+            //}
+            //Console.Write("\n");
+
+                chrono.Restart();
+                List<int> solution = mergeSort.Solve(vector, vector.Count);
+                chrono.Stop();
+                var elapsedMsMerge = chrono.Elapsed;
+
+            //Console.Write("MergeSort Solution: ");
+            //foreach (int i in solution)
+            //{
+            //    Console.Write(i);
+            //    Console.Write(" ");
+            //}
+            //Console.Write("\n");
+
+                chrono.Restart();
+                List<int> solution2 = quickSort.Solve(vector, vector.Count);
+                chrono.Stop();
+                var elapsedMsQuick = chrono.Elapsed;
+
+            //Console.Write("QuickSort Solution: ");
+            //foreach (int i in solution2)
+            //{
+            //    Console.Write(i);
+            //    Console.Write(" ");
+            //}
+            //Console.Write("\n");
+
+                table.PrintRow(size.ToString(), elapsedMsMerge.ToString(), elapsedMsQuick.ToString());
+                table.PrintLine();
+
+                size += 10;
             }
-            Console.Write("\n");
+            
+
+
+
+
         }
     }
 }
