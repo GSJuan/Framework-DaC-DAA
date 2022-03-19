@@ -1,11 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Framework_DaC_DAA
 {
     public class QuickSort : IAlgorithm
     {
+        private readonly int subproblems = 2;
+        private readonly int reductionFactor = 2;
+        private readonly int combineComplexity = 1;
+
+        public int GetSubproblems()
+        {
+            return subproblems;
+        }
+
+        public int GetReductionFactor()
+        {
+            return reductionFactor;
+        }
+
+        public int GetCombineComplexity()
+        {
+            return combineComplexity;
+        }
+
         public List<int> Combine(List<int> left, List<int> right)
         {
             left.AddRange(right);

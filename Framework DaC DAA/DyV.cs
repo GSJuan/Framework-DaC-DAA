@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Framework_DaC_DAA
 {
@@ -23,7 +22,7 @@ namespace Framework_DaC_DAA
         }
 
         public String Recurrence() {
-            String result = "T(n) = ";
+            String result = "T(n) = " + algorithm.GetSubproblems() + "T(n/" + algorithm.GetReductionFactor() + ") + n^" + algorithm.GetCombineComplexity();
             return result;
         }
     }

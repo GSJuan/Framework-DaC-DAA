@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Framework_DaC_DAA
 {
     public interface IAlgorithm
     {
+        public int GetSubproblems();
+
+        public int GetReductionFactor();
+
+        public int GetCombineComplexity();
         public bool Small(List<int> vector);
 
         public List<int> SolveSmall(List<int> vector);

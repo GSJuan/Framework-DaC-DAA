@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Framework_DaC_DAA
@@ -18,7 +17,7 @@ namespace Framework_DaC_DAA
             table.PrintRow("Size", "MergeSort Time", "QuickSort Time");
             table.PrintLine();
 
-            while (size < 200)
+            while (size <= 100)
             {
                 InstanceGenerator instanceGenerator = new InstanceGenerator(size);
                 List<int> vector = instanceGenerator.Generate();
@@ -60,13 +59,8 @@ namespace Framework_DaC_DAA
                 table.PrintRow(size.ToString(), elapsedMsMerge.ToString(), elapsedMsQuick.ToString());
                 table.PrintLine();
 
-                size += 10;
+                size += 5;
             }
-            
-
-
-
-
         }
     }
 }
