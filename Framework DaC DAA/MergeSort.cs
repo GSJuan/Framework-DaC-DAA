@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Framework_DaC_DAA
 {
-    public class MargeSort : IAlgorithm
+    public class MergeSort : IAlgorithm
     {
         public List<int> Combine(List<int> left, List<int> right)
         {
@@ -14,10 +14,10 @@ namespace Framework_DaC_DAA
             {
                 if (left.Count > 0 && right.Count > 0)
                 {
-                    if (left[0] <= right[0])  //Comparing First two elements to see which is smaller
+                    if (left[0] <= right[0])
                     {
                         result.Add(left[0]);
-                        left.Remove(left[0]);      //Rest of the list minus the first element
+                        left.Remove(left[0]);
                     }
                     else
                     {
@@ -42,8 +42,7 @@ namespace Framework_DaC_DAA
         public List<List<int>> Divide(List<int> vector, int d = 2)
         {
             List<List<int>> solution = new List<List<int>>();
-            decimal tempSize = vector.Count / (decimal) d;
-            int size = (int)Math.Ceiling(tempSize);
+            int size = (int)Math.Ceiling(vector.Count / (decimal)d);
 
             for(int i = 0; i < vector.Count; i+= size)
             {

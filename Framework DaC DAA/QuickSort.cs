@@ -6,24 +6,76 @@ namespace Framework_DaC_DAA
 {
     public class QuickSort : IAlgorithm
     {
-        public List<int> Combine(List<int> vector, List<int> vector2)
+        public List<int> Combine(List<int> left, List<int> right)
         {
-            throw new NotImplementedException();
+            List<int> result = new List<int>();
+            for(int i = 0; i < left.Count; i++)
+            {
+                result.Add(left[i]);
+            }
+            for(int i = 0; i < right.Count; i++)
+            {
+                result.Add(right[i]);
+            }
+            return result;
         }
 
         public List<List<int>> Divide(List<int> vector, int d = 2)
         {
-            throw new NotImplementedException();
+            
+            int i = 0, j = vector.Count-1;
+            int pivot = vector[vector.Count / 2];
+            List<List<int>> result = new List<List<int>>();
+            while (i < j)
+            {
+                while (vector[i] < pivot)
+                {
+                    i++;
+                }
+                while (vector[j] > pivot)
+                {
+                    j--;
+                }
+                if (i < j)
+                {
+                    int temp = vector[j];
+                    vector[j] = vector[i];
+                    vector[i] = temp;
+                }                    
+            }
+            result.Add(vector.GetRange(0, j));
+            result.Add(vector.GetRange(j, vector.Count - j));
+            return result;
         }
 
         public bool Small(List<int> vector)
         {
-            throw new NotImplementedException();
+            if (vector.Count <= 1 /* 2 */)
+            {
+                return true;
+            }
+            else return false;
         }
 
         public List<int> SolveSmall(List<int> vector)
         {
-            throw new NotImplementedException();
+            //List<int> result = new List<int>();
+            //if (vector.Count <= 1)
+            //{
+            //    return vector;
+            //}
+            //else if (vector[0] <= vector[1])
+            //{
+            //    result = vector;
+            //}
+            //else
+            //{
+            //    result.Add(vector[1]);
+            //    result.Add(vector[0]);
+            //}
+            //return result;
+            
+            return vector;
         }
     }
 }

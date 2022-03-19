@@ -16,8 +16,8 @@ namespace Framework_DaC_DAA
             else
             {
                 List<List<int>> dividedProblem = algorithm.Divide(vector);
-                List<int> s1 = Solve(dividedProblem[0], size / 2);
-                List<int> s2 = Solve(dividedProblem[1], size / 2);
+                List<int> s1 = Solve(dividedProblem[0], dividedProblem[0].Count);
+                List<int> s2 = Solve(dividedProblem[1], dividedProblem[1].Count);
                 return algorithm.Combine(s1, s2);
             }
         }
