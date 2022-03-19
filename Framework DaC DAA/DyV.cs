@@ -21,5 +21,10 @@ namespace Framework_DaC_DAA
                 return algorithm.Combine(s1, s2);
             }
         }
+
+        public String Recurrence() {
+            String result = "T(n) = ";
+            return result;
+        }
     }
 }

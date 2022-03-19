@@ -42,11 +42,12 @@ namespace Framework_DaC_DAA
         public List<List<int>> Divide(List<int> vector, int d = 2)
         {
             List<List<int>> solution = new List<List<int>>();
-            int size = vector.Count / d;
+            decimal tempSize = vector.Count / (decimal) d;
+            int size = (int)Math.Ceiling(tempSize);
 
-            for(int i = 0; i < vector.Count; i+= d)
+            for(int i = 0; i < vector.Count; i+= size)
             {
-                solution.Add(vector.GetRange(i, Math.Min(d, vector.Count - i)));
+                solution.Add(vector.GetRange(i, Math.Min(size, vector.Count - i)));
             }
             return solution;
         }
