@@ -30,17 +30,16 @@ namespace Framework_DaC_DAA
         }
         public List<List<int>> Divide(List<int> vector, int d = 2)
         {
-            
             int i = 0, j = vector.Count-1;
-            int pivot = vector[vector.Count / 2];
+            int pivot = vector.Count / 2;
             List<List<int>> result = new List<List<int>>();
             while (i < j)
             {
-                while (vector[i] < pivot)
+                while (vector[i] < vector[pivot])
                 {
                     i++;
                 }
-                while (vector[j] > pivot)
+                while (vector[j] > vector[pivot])
                 {
                     j--;
                 }
@@ -49,6 +48,9 @@ namespace Framework_DaC_DAA
                     int temp = vector[j];
                     vector[j] = vector[i];
                     vector[i] = temp;
+                    break;
+                    i++;
+                    j--;
                 }                    
             }
             result.Add(vector.GetRange(0, j));
