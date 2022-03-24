@@ -23,16 +23,29 @@ namespace Framework_DaC_DAA
             return combineComplexity;
         }
 
-        public List<int> Combine(List<int> left, List<int> right)
-        {
-            left.AddRange(right);
-            return left;
+        public ISolution Combine(ISolution l, ISolution r)
+        {   
+            IntListSolution left = (IntListSolution)l;
+            IntListSolution right = (IntListSolution)r;
+
+            List<int> vector1 = left.list;
+            List<int> vector2 = right.list;
+
+            vector1.AddRange(vector2);
+            return new IntListSolution(vector1);
         }
-        public List<List<int>> Divide(List<int> vector, int d = 2)
+        public List<IProblem> Divide(IProblem p, int d = 2)
         {
+
+            IntListProblem problem = (IntListProblem)p;
+
+            List<int> vector = problem.list;
+
+            List<IProblem> result = new List<IProblem>();
+
             int i = 0, j = vector.Count-1;
             int pivot = vector.Count / 2;
-            List<List<int>> result = new List<List<int>>();
+
             while (i < j)
             {
                 while (vector[i] < vector[pivot])
@@ -45,47 +58,40 @@ namespace Framework_DaC_DAA
                 }
                 if (i < j)
                 {
-                    int temp = vector[j];
-                    vector[j] = vector[i];
-                    vector[i] = temp;
-                    break;
+                    (vector[i], vector[j]) = (vector[j], vector[i]);
                     i++;
                     j--;
                 }                    
             }
-            result.Add(vector.GetRange(0, j));
-            result.Add(vector.GetRange(j, vector.Count - j));
+
+            result.Add(new IntListProblem(vector.GetRange(0, j)));
+
+            result.Add(new IntListProblem(vector.GetRange(j, vector.Count - j)));
+
             return result;
         }
 
-        public bool Small(List<int> vector)
+        public bool Small(IProblem vector)
         {
-            if (vector.Count <= 1 /* 2 */)
-            {
-                return true;
-            }
-            else return false;
+            return vector.GetSize() <= 2;
         }
 
-        public List<int> SolveSmall(List<int> vector)
+        public ISolution SolveSmall(IProblem p)
         {
-            //List<int> result = new List<int>();
-            //if (vector.Count <= 1)
-            //{
-            //    return vector;
-            //}
-            //else if (vector[0] <= vector[1])
-            //{
-            //    result = vector;
-            //}
-            //else
-            //{
-            //    result.Add(vector[1]);
-            //    result.Add(vector[0]);
-            //}
-            //return result;
-            
-            return vector;
+            IntListProblem problem = (IntListProblem)p;
+
+            List<int> vector = problem.list;
+            if (vector.Count <= 1 || vector[0] <= vector[1])
+            {
+                return new IntListSolution(vector);
+            }
+            else
+            {
+                List<int> result = new List<int>();
+                result.Add(vector[1]);
+                result.Add(vector[0]);
+                return new IntListSolution(result);
+            }
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Framework_DaC_DAA
             while (size <= 10000)
             {
                 InstanceGenerator instanceGenerator = new InstanceGenerator(size);
-                List<int> vector = instanceGenerator.Generate();
+                IntListProblem vector = new IntListProblem(instanceGenerator.Generate());
 
                 //Console.Write("Generated Instance of size {0}:  ", size);
                 //foreach (int i in vector)
@@ -32,7 +32,7 @@ namespace Framework_DaC_DAA
                 //Console.Write("\n");
 
                 chrono.Restart();
-                List<int> solution = mergeSort.Solve(vector, vector.Count);
+                ISolution solution = mergeSort.Solve(vector, vector.GetSize());
                 chrono.Stop();
                 var elapsedMsMerge = chrono.Elapsed;
 
@@ -45,7 +45,7 @@ namespace Framework_DaC_DAA
                 //Console.Write("\n");
 
                 chrono.Restart();
-                List<int> solution2 = quickSort.Solve(vector, vector.Count);
+                ISolution solution2 = quickSort.Solve(vector, vector.GetSize());
                 chrono.Stop();
                 var elapsedMsQuick = chrono.Elapsed;
 
@@ -60,7 +60,7 @@ namespace Framework_DaC_DAA
                 //}
                 //Console.Write("\n");
 
-                size += 5;
+                size += 100;
             }
         }
     }

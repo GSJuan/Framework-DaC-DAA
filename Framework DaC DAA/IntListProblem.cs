@@ -4,8 +4,20 @@ using System.Text;
 
 namespace Framework_DaC_DAA
 {
-    public class IntListProblem : Problem
+    public class IntListProblem : IProblem
     {
-        private List<int> list = new List<int>();
+        public List<int> list = new List<int>();
+        
+        public IntListProblem()
+        {
+        }
+        public IntListProblem(List<int> temp)
+        {
+            this.list = temp;
+        }
+        public int GetSize()
+        {
+            return list.Count;
+        }
     }
 }

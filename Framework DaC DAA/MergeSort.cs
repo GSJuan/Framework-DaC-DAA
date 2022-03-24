@@ -24,77 +24,81 @@ namespace Framework_DaC_DAA
             return combineComplexity;
         }
 
-        public List<int> Combine(List<int> left, List<int> right)
+        public ISolution Combine(ISolution l, ISolution r)
         {
-            List<int> result = new List<int>();
+            IntListSolution result = new IntListSolution();
 
-            while (left.Count > 0 || right.Count > 0)
+            IntListSolution left = (IntListSolution)l;
+            IntListSolution right = (IntListSolution)r;
+
+            while (left.GetSize() > 0 || right.GetSize() > 0)
             {
-                if (left.Count > 0 && right.Count > 0)
+                if (left.GetSize() > 0 && right.GetSize() > 0)
                 {
-                    if (left[0] <= right[0])
+                    if (left.list[0] <= right.list[0])
                     {
-                        result.Add(left[0]);
-                        left.Remove(left[0]);
+                        result.list.Add(left.list[0]);
+                        left.list.Remove(left.list[0]);
                     }
                     else
                     {
-                        result.Add(right[0]);
-                        right.Remove(right[0]);
+                        result.list.Add(right.list[0]);
+                        right.list.Remove(right.list[0]);
                     }
                 }
-                else if (left.Count > 0)
+                else if (left.GetSize() > 0)
                 {
-                    result.Add(left[0]);
-                    left.Remove(left[0]);
+                    result.list.Add(left.list[0]);
+                    left.list.Remove(left.list[0]);
                 }
-                else if (right.Count > 0)
+                else if (right.GetSize() > 0)
                 {
-                    result.Add(right[0]);
-                    right.Remove(right[0]);
+                    result.list.Add(right.list[0]);
+                    right.list.Remove(right.list[0]);
                 }
             }
             return result;
         }
 
-        public List<List<int>> Divide(List<int> vector, int d = 2)
+        public List<IProblem> Divide(IProblem p, int reductionFactor = 2)
         {
-            List<List<int>> solution = new List<List<int>>();
-            int size = (int)Math.Ceiling(vector.Count / (decimal)d);
+            IntListProblem problem = (IntListProblem)p;
 
-            for(int i = 0; i < vector.Count; i+= size)
+            List<int> list = problem.list;
+
+            List<IProblem> result = new List<IProblem>();
+
+            int partitionSize = (int)Math.Ceiling(list.Count / (decimal)reductionFactor);
+
+            for (int i = 0; i < list.Count; i += partitionSize)
             {
-                solution.Add(vector.GetRange(i, Math.Min(size, vector.Count - i)));
+                List<int> temp = list.GetRange(i, Math.Min(partitionSize, list.Count - i));
+                result.Add(new IntListProblem(temp));
             }
-            return solution;
+            return result;
         }
 
-        public bool Small(List<int> vector)
+        public bool Small(IProblem vector)
         {
-            if (vector.Count <= 2)
-            {
-                return true;
-            }
-            else return false;
+            return vector.GetSize() <= 2;
         }
 
-        public List<int> SolveSmall(List<int> vector)
+        public ISolution SolveSmall(IProblem p)
         {
-            List<int> result = new List<int>();
-            if(vector.Count <=1)
+            IntListProblem problem = (IntListProblem)p;
+
+            List<int> vector = problem.list;
+            if (vector.Count <= 1 || vector[0] <= vector[1])
             {
-                return vector;
-            }
-            else if(vector[0] <= vector[1])
-            {
-                result = vector;
+                return new IntListSolution(vector);
             }
             else
-            {
+            {   List<int> result = new List<int>();
                 result.Add(vector[1]);
                 result.Add(vector[0]);
+                return new IntListSolution(result);
             }
-            return result;
+            
         }
     }
 }

@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Framework_DaC_DAA
 {
-    public abstract class Solution
+    public interface IProblem
     {
+        public int GetSize();
     }
 }
