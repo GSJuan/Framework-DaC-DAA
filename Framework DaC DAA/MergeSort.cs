@@ -24,12 +24,12 @@ namespace Framework_DaC_DAA
             return combineComplexity;
         }
 
-        public ISolution Combine(ISolution l, ISolution r)
+        public ISolution Combine(List<ISolution> solutions)
         {
             IntListSolution result = new IntListSolution();
 
-            IntListSolution left = (IntListSolution)l;
-            IntListSolution right = (IntListSolution)r;
+            IntListSolution left = (IntListSolution)solutions[0];
+            IntListSolution right = (IntListSolution)solutions[1];
 
             while (left.GetSize() > 0 || right.GetSize() > 0)
             {

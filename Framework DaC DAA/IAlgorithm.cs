@@ -15,7 +15,7 @@ namespace Framework_DaC_DAA
 
         public List<IProblem> Divide(IProblem vector, int d = 2);
 
-        public ISolution Combine(ISolution vector, ISolution vector2);
+        public ISolution Combine(List<ISolution> solutions);
 
     }
 }

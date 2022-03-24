@@ -22,7 +22,7 @@ namespace Framework_DaC_DAA
             Random random = new Random();
             for (int i = 0; i < size; i++)
             {
-                list.Add(random.Next());
+                list.Add(random.Next(100));
             }
             return list;
         }

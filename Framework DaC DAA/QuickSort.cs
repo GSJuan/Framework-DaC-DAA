@@ -23,10 +23,10 @@ namespace Framework_DaC_DAA
             return combineComplexity;
         }
 
-        public ISolution Combine(ISolution l, ISolution r)
+        public ISolution Combine(List<ISolution> solutions)
         {   
-            IntListSolution left = (IntListSolution)l;
-            IntListSolution right = (IntListSolution)r;
+            IntListSolution left = (IntListSolution)solutions[0];
+            IntListSolution right = (IntListSolution)solutions[1];
 
             List<int> vector1 = left.list;
             List<int> vector2 = right.list;
