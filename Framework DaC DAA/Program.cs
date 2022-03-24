@@ -56,6 +56,7 @@ namespace Framework_DaC_DAA
                         var elapsedMsMerge = chrono.Elapsed;
                         table.PrintRow(size.ToString(), elapsedMsMerge.ToString());
                         table.PrintLine();
+
                     } else if(alg == 1)
                     {
                         chrono.Restart();
@@ -64,10 +65,15 @@ namespace Framework_DaC_DAA
                         var elapsedMsQuick = chrono.Elapsed;
                         table.PrintRow(size.ToString(), elapsedMsQuick.ToString());
                         table.PrintLine();
+
                     } else if(alg == 2)
                     {
+                        ISolution s = quickSort.Solve(vector);
+                        IntListSolution s1 = (IntListSolution)s;
+                        BooleanProblem sortedVec = new BooleanProblem(s1.list, vector.list[0]);
+                       
                         chrono.Restart();
-                        ISolution solution3 = binarySearch.Solve(vector, vector.list[0]);
+                        ISolution solution3 = binarySearch.Solve(sortedVec);
                         chrono.Stop();
                         var elapsedMsQuick = chrono.Elapsed;
                         table.PrintRow(size.ToString(), elapsedMsQuick.ToString());
@@ -114,7 +120,7 @@ namespace Framework_DaC_DAA
                     ISolution solution = quickSort.Solve(vector);
                     IntListSolution sorted = (IntListSolution)solution;
 
-                    Console.Write("MergeSort Solution: ");
+                    Console.Write("QuickSort Solution: ");
                     foreach (int i in sorted.list)
                     {
                         Console.Write(i);
@@ -130,9 +136,13 @@ namespace Framework_DaC_DAA
                     int toSearch = int.Parse(input);
 
                     ISolution solution = quickSort.Solve(vector, toSearch);
-                    BooleanSolution solved = (BooleanSolution)solution;
+                    IntListSolution s1 = (IntListSolution)solution;
+                    BooleanProblem sortedVec = new BooleanProblem(s1.list, toSearch);
 
-                    if(solved.found)
+                    ISolution search = binarySearch.Solve(sortedVec);
+                    BooleanSolution solved = (BooleanSolution)search;
+
+                    if (solved.found)
                     {
                         Console.Write("Number {0} found inside the vector!", toSearch);
                     }

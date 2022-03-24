@@ -26,22 +26,44 @@ namespace Framework_DaC_DAA
 
         public ISolution Combine(List<ISolution> solutions)
         {
-            throw new NotImplementedException();
+            return solutions[0];
         }
 
         public List<IProblem> Divide(IProblem vector, int d = 2)
-        {
-            throw new NotImplementedException();
+        {   
+            BooleanProblem problem = (BooleanProblem)vector;
+            int medium = problem.list.Count / 2;
+
+            List<IProblem> result = new List<IProblem>();
+
+            if(problem.list[medium] > problem.value)
+            {
+                List<int> temp = problem.list.GetRange(0, medium);
+                result.Add(new BooleanProblem(temp, problem.value));
+            }
+            else
+            {
+                List<int> temp = problem.list.GetRange(medium, problem.list.Count - medium);
+                result.Add(new BooleanProblem(temp, problem.value));
+            }
+            return result;
         }
 
         public bool Small(IProblem vector)
         {
-            throw new NotImplementedException();
+            return vector.GetSize() <= 1;
         }
 
         public ISolution SolveSmall(IProblem vector)
-        {
-            throw new NotImplementedException();
+        {   
+            BooleanSolution solution = new BooleanSolution();
+            BooleanProblem value = (BooleanProblem)vector;
+
+            if(value.list[0] == value.value)
+            {
+                solution.found = true;
+            }
+            return solution;
         }
     }
 }
