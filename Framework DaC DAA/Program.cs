@@ -131,12 +131,22 @@ namespace Framework_DaC_DAA
                 else if (alg == 2)
                 {
 
+                    ISolution solution = mergeSort.Solve(vector);
+                    IntListSolution s1 = (IntListSolution)solution;
+
+                    Console.WriteLine("Sorted Vector: ");
+
+                    foreach (int i in s1.list)
+                    {
+                        Console.Write(i);
+                        Console.Write(" ");
+                    }
+                    Console.Write("\n");
+
                     Console.WriteLine("Enter the Number you want to search inside the vector: ");
                     string input = Console.ReadLine();
                     int toSearch = int.Parse(input);
 
-                    ISolution solution = quickSort.Solve(vector, toSearch);
-                    IntListSolution s1 = (IntListSolution)solution;
                     BooleanProblem sortedVec = new BooleanProblem(s1.list, toSearch);
 
                     ISolution search = binarySearch.Solve(sortedVec);
