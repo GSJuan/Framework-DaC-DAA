@@ -43,16 +43,20 @@ namespace Framework_DaC_DAA
 
             List<IProblem> result = new List<IProblem>();
 
-            int i = 0, j = vector.Count-1;
-            int pivot = vector.Count / 2;
+            int i = 0, j = vector.Count - 2;
+            int pivot = vector[vector.Count / 2];
+
+            int pivotIndex = vector.Count / 2;
+
+            (vector[pivotIndex], vector[j + 1]) = (vector[j + 1], vector[pivotIndex]);
 
             while (i < j)
             {
-                while (vector[i] < vector[pivot])
+                while (vector[i] < pivot)
                 {
                     i++;
                 }
-                while (vector[j] > vector[pivot])
+                while (j >= 0 && vector[j] > pivot)
                 {
                     j--;
                 }
@@ -61,12 +65,15 @@ namespace Framework_DaC_DAA
                     (vector[i], vector[j]) = (vector[j], vector[i]);
                     i++;
                     j--;
-                }                    
+                }
+
             }
 
-            result.Add(new IntListProblem(vector.GetRange(0, j)));
+            (vector[i], vector[vector.Count - 1]) = (vector[vector.Count - 1], vector[i]);
 
-            result.Add(new IntListProblem(vector.GetRange(j, vector.Count - j)));
+            result.Add(new IntListProblem(vector.GetRange(0, i + 1)));
+
+            result.Add(new IntListProblem(vector.GetRange(j + 1, vector.Count - (i + 1))));
 
             return result;
         }
