@@ -38,17 +38,15 @@ namespace Framework_DaC_DAA
         {
 
             IntListProblem problem = (IntListProblem)p;
-
             List<int> vector = problem.list;
-
             List<IProblem> result = new List<IProblem>();
 
             int i = 0, j = vector.Count - 2;
-            int pivot = vector[vector.Count / 2];
-
+            int endPos = vector.Count - 1;
             int pivotIndex = vector.Count / 2;
+            int pivot = vector[pivotIndex];         
 
-            (vector[pivotIndex], vector[j + 1]) = (vector[j + 1], vector[pivotIndex]);
+            (vector[pivotIndex], vector[endPos]) = (vector[endPos], vector[pivotIndex]);
 
             while (i < j)
             {
@@ -65,15 +63,28 @@ namespace Framework_DaC_DAA
                     (vector[i], vector[j]) = (vector[j], vector[i]);
                     i++;
                     j--;
-                }
+                }              
 
             }
 
-            (vector[i], vector[vector.Count - 1]) = (vector[vector.Count - 1], vector[i]);
+            (vector[i], vector[endPos]) = (vector[endPos], vector[i]);
+            pivotIndex = i;
 
-            result.Add(new IntListProblem(vector.GetRange(0, i + 1)));
+            List<int> temp = new List<int>();
+            List<int> temp2 = new List<int>();
 
-            result.Add(new IntListProblem(vector.GetRange(j + 1, vector.Count - (i + 1))));
+            for (int k = 0; k < pivotIndex ; k++)
+            {
+                temp.Add(vector[k]);
+            }
+
+            for (int k = pivotIndex; k <= endPos; k++)
+            {
+                temp2.Add(vector[k]);
+            }
+
+            result.Add(new IntListProblem(temp));
+            result.Add(new IntListProblem(temp2));
 
             return result;
         }
